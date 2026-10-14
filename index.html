@@ -90,7 +90,7 @@ function parse(lines){
   const qs=[];let cur=null,state="none";
   for(const t of lines){
     const m=t.match(/^(\d+)\.\s+(.+)$/);
-    if(m&&+m[1]===qs.length+1&&(state==="none"||state==="done")){cur={no:+m[1],q:[m[2]],items:[],opts:{},pemb:[],key:null};qs.push(cur);state="items";continue}
+    if(m&&(state==="none"||state==="done")){cur={no:+m[1],q:[m[2]],items:[],opts:{},pemb:[],key:null};qs.push(cur);state="items";continue}
     if(!cur)continue;
     if(/^Pembahasan/i.test(t)){state="pemb";const r=t.replace(/^Pembahasan\s*:?\s*/i,"");if(r)cur.pemb.push(r);continue}
     const j=t.match(/^Jawaban\s*:?\s*([A-E])\b/i);
